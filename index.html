@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <style>
+    :root {
+  --bg: #f0f2f5;
+  --blue: #1877f2;
+  --dark-blue: #1360c4;
+  --white: #FFFFFF;
+  --green: #42b72a;
+  --dark-green: #369423;
+  --steel-gray: #717972;
+  --dark-gray: #A9A9A9;
+  --deep-sea-blue: #123456;
+  --navy: #000080;
+  --deep-green: #056608;
+  --black: #000000;
+  --red: #FF0000;
+  --maroon: #800000;
+  --aquam-arine: #7FFFD4;
+  --charcoal: #36454F;
+}
+
+
+
+body {
+  background-color: var(--bg);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.main-wrapper {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.panel img {
+  /*border-radius: 50%;*/
+}
+
+.logo {
+  color: var(--deep-sea-blue);
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+input[type="email or number"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid var(--dark-gray);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button.login {
+  background-color: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.login:hover {
+  background-color: var(--dark-blue);
+}
+
+a.forgot {
+  color: var(--steel-gray);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+a.forgot:hover {
+  text-decoration: underline;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+.text1 {
+  font-size: 14px;
+  color: var(--steel-gray);
+}
+
+.text1 a {
+  color: var(--green);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.text1 a:hover {
+  color: var(--dark-green);
+}
+
+.slogan {
+  font-size: 12px;
+  color: var(--steel-gray);
+  margin-top: 20px;
+}
+</style>
+
+
+  <title>Data</title>
+</head>
+<body>
+  <center>
+  <form action="newsfeed.html">
+  <section class="main-wrapper">
+    <center><div class="panel">
+        <img src="/1722184097065.jpg" style="width: 120px; height: 105px;">
+        <h1 class="logo">Data Entry</h1>
+          <input type="email or number" placeholder="Enter email address" required style="margin-bottom: 4px;">
+          <input type="password" placeholder="Enter your password" required>
+            <div class="link">
+              
+              <center><button type="submit" class="login" style="margin-bottom: 10px; font-weight: bold;">Sign In</button></center>
+              <center>
+
+  </div>
+  </center>
+  </section>
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const email = document.querySelector('input[type="email or number"]').value;
+  const password = document.querySelector('input[type="password"]').value;
+
+  if (email === 'example@gmail.com' && password === '1234') {
+    window.location.href = '/table.html';
+  } else {
+    alert('Incorrect email or password');
+  }
+});
+</script>
+ </body>
+</html>

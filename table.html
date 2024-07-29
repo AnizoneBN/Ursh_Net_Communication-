@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Table</title>
+ <link rel="stylesheet" href="/style.css">
+
+     <style>
+       body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #search-container {
+            margin-bottom: 20px;
+            position: relative;
+            width:200px;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 10px 10px 10px 40px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        #search-input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        #search-input:hover {
+            border-color: #0056b3;
+        }
+
+        #search-icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-60%);
+            font-size: 20px;
+            color: #aaa;
+        }
+
+        #add-row {
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #add-row:hover {
+            background-color: red;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding:10px;
+            border: 1px solid teal;
+            text-align: left;
+        }
+
+        th {
+            background-color: teal;
+          color:white;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions button {
+            padding: 5px 10px;
+            border: none;
+            border-radius:3px;
+            cursor: pointer;
+        }
+
+        .actions .edit {
+            background-color: silver;
+            color: black;
+        }
+
+        .actions .delete {
+            background-color: orange;
+            color: black;
+        }
+
+        .actions .save {
+            background-color: darkgreen;
+            color: white;
+        }
+  
+
+        .editing {
+            background-color: #f0f0f0; 
+        }
+  
+         body {
+        background-image: linear-gradient(silver,silver);
+         }
+  
+         hr{
+           width:634px;
+           background-color:black;
+         }  
+  
+         marquee{
+         background-color: teal;
+         border-radius:1px;
+         width:1025px;
+         height:40px;
+         border-radius:3px;
+         }
+  
+         u{
+         border-radius:5px;
+           color:black;
+         }
+  
+         label{
+             background-color:white;
+           color:black;
+        }
+  
+         hr{
+          width:1025px;
+        }
+  
+        hr{
+        height:5px;
+        background-color:teal;
+        }
+  
+        fieldset{
+         border-radius:3px;
+        }
+        legend{
+        baackground-color:white;
+        }
+          mark{
+            background-color:skyblue;
+            border-radius:3px;
+          }
+  add row{
+    max-height
+    overflow-y
+  }
+  
+        /*  #table-container {
+          max-height: 400px;
+          overflow-y: auto;
+          border: 1px solid #ddd;
+          margin-top: 20px;
+        }*/
+        #table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+#customer-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#customer-table th, #customer-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+#customer-table th {
+    
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+       
+        
+ </style>
+</head>
+<fieldset>
+ <h1>
+    <i><marquee direction="left"><b>
+      <mark> <font color="teal"><font color="darkgreen">U</font><font color="red">RS</font><font color="darkgreen">H  </font><font color="Darkblue">NET COMMUNICATION</font></marquee>
+      </font></mark>
+       </b>
+      </center>
+ </h1>
+</i>
+
+<body>
+    <div id="search-container">
+      <b><input type="text" id="search-input" placeholder="Search.....">
+     <i id="search-icon" class="fas fa-search"></i>
+      </div>
+    <button id="add-row">
+      Add New
+    </button>
+    <div id="table-container">
+    <table id="customer-table">
+        <thead >
+          <strong><tr>
+         
+                <th>ID NO.</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Receive</th>
+                <th>Taka</th>
+                <th>Cash</th>
+                <th>Payment</th>
+                <th>Actions</th>
+
+          </font> </tr></strong>
+        </thead>
+        <tbody>
+          
+        </tbody>
+        
+    </table>
+    </div>
+<!--
+    <script src="/main.js">
+        
+    </script>-->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+    const tableBody = document.querySelector('#customer-table tbody');
+    const searchInput = document.querySelector('#search-input');
+    const addRowButton = document.querySelector('#add-row');
+    let data = [];
+    const password = 'Ursh09877890'; 
+
+    
+    if (localStorage.getItem('customerData')) {
+        data = JSON.parse(localStorage.getItem('customerData'));
+        renderTable();
+    }
+
+    
+    function renderTable() {
+        tableBody.innerHTML = '';
+        data.forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td contenteditable="false">${item.name}</td>
+                <td contenteditable="false">${item.mobileNumber}</td>
+                <td contenteditable="false">${item.receive}</td>
+                <td contenteditable="false">${item.taka}</td>
+                <td contenteditable="false">${item.cash} </td>
+                <td contenteditable="false">${item.payment}</td>
+                <td class="actions">
+                    <button class="edit">Edit</button>
+                    <button class="delete">Delete</button>
+                    <button class="save">Save</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+
+            
+            const editButton = row.querySelector('.edit');
+            const deleteButton = row.querySelector('.delete');
+            const saveButton = row.querySelector('.save');
+
+            editButton.addEventListener('click', () => promptPassword(index));
+            deleteButton.addEventListener('click', () => deleteRow(index));
+            saveButton.addEventListener('click', () => saveRow(index));
+        });
+    }
+
+    
+    function promptPassword(index) {
+        const userPassword = prompt('Enter password to edit:');
+        if (userPassword === password) {
+            editRow(index);
+        } else {
+            alert('WRONG PASSWORD.TRY AGAIN');
+        }
+    }
+
+    
+    function addRow() {
+        const newRow = {
+            name: '',
+            mobileNumber: '',
+            receive: '',
+            taka: '',
+            cash: '',
+            payment: ''
+        };
+        data.push(newRow);
+        updateLocalStorageAndRender();
+    }
+
+    
+    function editRow(index) {
+        
+        const row = tableBody.querySelectorAll('tr')[index];
+        row.classList.add('editing');
+
+        
+        const cells = row.querySelectorAll('td');
+        cells.forEach(cell => {
+            cell.contentEditable = true;
+        });
+    }
+
+   
+    function saveRow(index) {
+        const row = tableBody.querySelectorAll('tr')[index];
+        const cells = row.querySelectorAll('td');
+
+        
+        data[index].name = cells[1].textContent;
+        data[index].mobileNumber = cells[2].textContent;
+        data[index].receive = cells[3].textContent;
+        data[index].taka = cells[4].textContent;
+        data[index].cash = cells[5].textContent;
+        data[index].payment = cells[6].textContent;
+
+        
+        row.classList.remove('editing');
+        cells.forEach(cell => {
+            cell.contentEditable = false;
+        });
+
+        updateLocalStorageAndRender();
+    }
+
+    
+    function deleteRow(index) {
+        data.splice(index, 1);
+        updateLocalStorageAndRender();
+    }
+
+    function updateLocalStorageAndRender() {
+        localStorage.setItem('customerData', JSON.stringify(data));
+        renderTable();
+    }
+
+   
+    function filterRows() {
+        const filter = searchInput.value.toLowerCase();
+        const rows = tableBody.querySelectorAll('tr');
+
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            const name = cells[1].textContent.toLowerCase();
+            const mobileNumber = cells[2].textContent.toLowerCase();
+
+            if (name.includes(filter) || mobileNumber.includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    
+    addRowButton.addEventListener('click', addRow);
+
+   
+    searchInput.addEventListener('input', filterRows);
+
+    renderTable();
+});
+   </script>
+<br>
+
+<label for="birthday">DATE</label>
+  <input type="date" id="birthday" name="birthday">
+<br><br>
+
+ <label for="appt">TIME</label>
+  <input type="time" id="appt" name="appt">
+<br><br><br>
+<hr>
+<b>
+<h2><font color="darkgreen">U</font><font color="red">RS</font><font color="darkgreen">H </font><font color="Darkblue">NET COMMUNICATION</font></marquee></font></h2></b>
+<address>
+  Narayanganj,Masdair,Baraybogh,Fotullah
+</adress>
+<address>
+  Mobile No:+8801833585307,+8801724400116
+</address>
+<address>
+  E-mail:ursh.net.communication@g-mail.com
+</address>
+<address>
+  Bikash Number: 01913482413
+</address>
+<b><i><u>Creator Name : Md Anas islam Soudi</b></i></u></fieldset>
+</body>
+</html>
